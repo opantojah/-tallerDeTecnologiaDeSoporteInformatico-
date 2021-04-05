@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <title>data getter</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous">
+    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+</head>
+
+<body>
+
+    <div id="botones">
+
+        <button onclick="obtenerJson()">
+            JSON
+        </button>
+
+        <button onclick="obtenerCsv()">
+            CSV
+        </button>
+
+        <div id="archivosSubidos">
+
+        </div>
+
+    </div>
+
+    <script>
+        function obtenerJson() {
+            obtenerDatos("json");
+        }
+        function obtenerCsv() {
+            obtenerDatos("csv");
+        }
+        function obtenerDatos(extencion){
+            $.ajax({
+                url: "http://localhost:8080/api/datos/" + extencion,
+                type: 'GET'
+            }).done(function (data) {
+                console.log((data.DataAsentamientos));
+            }).fail(function () {
+                console.error("error al intentar obtener los datos");
+            });
+        }
+    </script>
+
+</body>
+
+</html>
