@@ -42,10 +42,13 @@
                 url: "http://localhost:8080/api/datos/" + extencion,
                 type: 'GET'
             }).done(function (data) {
-                console.log((data.DataAsentamientos));
+                mostrarData(data);
             }).fail(function () {
                 console.error("error al intentar obtener los datos");
             });
+        }
+        function mostrarData(data) {
+            console.log((data.Data[0]));
         }
     </script>
 

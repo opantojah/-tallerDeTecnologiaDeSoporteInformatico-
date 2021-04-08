@@ -8,32 +8,24 @@ import org.springframework.stereotype.Service;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 @Service
 public class ManejadorDeArchivosCSV {
 
     private String ubicacionArchivo;
-    private String nombreDeArchivo;
     private char separador;
 
     public ManejadorDeArchivosCSV() {
-        this.ubicacionArchivo = "src/main/resources/files/";
-        this.nombreDeArchivo = "calles.csv";
-        this.separador = ';';
-    }
-
-    public CSVParser formatearSeparador(){
-        CSVParserBuilder puntoYcomaBuilder = new CSVParserBuilder();
-        puntoYcomaBuilder = puntoYcomaBuilder.withSeparator(separador);
-        CSVParser parser = puntoYcomaBuilder.build();
-        return parser;
+        this.ubicacionArchivo = "src/main/resources/files/calles.csv";
     }
 
     public FileReader obtenerArchivo(){
         FileReader reader = null;
         try {
-            reader = new FileReader(ubicacionArchivo + nombreDeArchivo);
+            reader = new FileReader(ubicacionArchivo);
         } catch (FileNotFoundException e) {
             String mensaje = "Archivo no encontrado, verifique el nombre y/o la ubicaión del mismo";
             System.out.println(mensaje);
@@ -42,37 +34,25 @@ public class ManejadorDeArchivosCSV {
         return reader;
     }
 
-    public CSVReader obtenerArchivoFormateado(){
-        FileReader fileReader = this.obtenerArchivo();
-        CSVReaderBuilder readerBuilder = new CSVReaderBuilder(fileReader);
-        CSVParser separadorFormateado = this.formatearSeparador();
-        readerBuilder = readerBuilder.withCSVParser(separadorFormateado);
-        CSVReader reader = readerBuilder.build();
-        return reader;
-    }
+    public HashMap<String, Object> obtenerDataConFormatoDeEnvio(){
+        CSVReader reader = new CSVReaderBuilder(this.obtenerArchivo()).build();
 
-    public Iterator<String[]> obtenerIterador(){
-        CSVReader reader = this.obtenerArchivoFormateado();
-        Iterator<String[]> iterador = reader.iterator();
-        return iterador;
-    }
+        Iterator<String[]> i = reader.iterator();
 
-    public void imprimirDatosConEspacios() throws FileNotFoundException {
+        ArrayList<Calle> calles = new ArrayList<>();
 
-        CSVReader reader = this.obtenerArchivoFormateado();
-        Iterator<String[]> iterador = reader.iterator();
+        HashMap<String, Object> dataFormateada = new HashMap<>();
 
-        while (iterador.hasNext()){
-            String[] fila = iterador.next();
-            String filaInfo = fila[0] + " " + fila[1] + " " + fila[2] + " " + fila[3] + " " + fila[5];
-            System.out.println(filaInfo);
+        while (i.hasNext()){
+            String[] fila = i.next();
 
+            Calle calle = new Calle(fila);
+
+            calles.add(calle);
         }
 
-    }
-
-    public static void main(String[] args) {
-
+        dataFormateada.put("Data", calles);
+        return dataFormateada;
     }
 
 }
