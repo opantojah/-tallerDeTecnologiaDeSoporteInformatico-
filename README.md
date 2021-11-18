@@ -4,7 +4,7 @@
 
 ### Trabajos:
 
-- [Tarea 13 de Mayo](https://github.com/pedrofernandez2003/-tallerDeTecnologiaDeSoporteInformatico-/tree/master/TP2)
+- [Tarea 13 de Mayo](https://github.com/pedrofernandez2003/-tallerDeTecnologiaDeSoporteInformatico-/tree/master/TP4/notebooks)
 - [Tarea 17 de Junio](https://github.com/pedrofernandez2003/-tallerDeTecnologiaDeSoporteInformatico-/tree/master/TP5/notebooks)
 - [Tarea 12 y 19 de Agosto](https://github.com/pedrofernandez2003/-tallerDeTecnologiaDeSoporteInformatico-/tree/master/TP6/notebooks)
 - [Tarea 26 de Agosto](https://github.com/pedrofernandez2003/-tallerDeTecnologiaDeSoporteInformatico-/tree/master/TP7/notebooks)
